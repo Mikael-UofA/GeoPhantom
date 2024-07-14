@@ -1,0 +1,16 @@
+{
+    "manifest_version": 3,
+    "name": "Location Spoofing",
+    "version": "1.0.1",
+    "author": "mikael.nineza@gmail.com",
+    "description": "My extension",
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "images/small_logo.png",
+            "48": "images/small_logo.png",
+            "128": "images/logo.png"
+        },
+        "default_title": "Run"
+    }
+}
