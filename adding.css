@@ -1,0 +1,25 @@
+body {
+    height: 250px;
+    width: 450px;
+    background-color: rgb(55, 0, 60);
+}
+
+.col-main {
+    margin-top: 10px;
+}
+.col-md-6 {
+    width: 200px;
+}
+.g-3 {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.btn-primary {
+    background-color: #ff2882;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #840E33;
+}
