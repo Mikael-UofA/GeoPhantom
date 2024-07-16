@@ -9,21 +9,11 @@
 </head>
 <body>
     <div class="list-group">
-        <button type="button" class="list-group-item list-group-item-action" aria-current="false">
-          A first item
-        </button>
-        <button type="button" class="list-group-item list-group-item-action" aria-current="false">
-            A second item
-        </button>
-        <button type="button" class="list-group-item list-group-item-action" aria-current="false">
-            A third button item
-        </button>
-        <button type="button" class="list-group-item list-group-item-action" aria-current="false">
-            A fourth button item
-        </button>
-        <button type="button" class="list-group-item list-group-item-action" aria-current="false">
-            A fifth button item
-        </button>
+        <button type="button" class="list-group-item list-group-item-action">A first item</button>
+        <button type="button" class="list-group-item list-group-item-action">A second item</button>
+        <button type="button" class="list-group-item list-group-item-action">A third button item</button>
+        <button type="button" class="list-group-item list-group-item-action">A fourth button item</button>
+        <button type="button" class="list-group-item list-group-item-action">A fifth button item</button>
     </div>
 
     <div class="movement">
@@ -33,8 +23,12 @@
     </div>
     
     <div class="main">
-        <button id="toggleButton" type="button" class="btn btn-primary btn-disabled" data-bs-toggle="button" autocomplete="off" aria-pressed="true">Disabled</button>
+        <button id="toggleButton" type="button" class="btn btn-prim btn-dis" autocomplete="off">Disabled</button>
     </div>
+
+    <div class="btn-group" role="group" aria-label="Third group">
+        <button type="button" class="btn btn-info" id="addButton">+</button>
+      </div>
     <script src="./popup.js"></script>
 </body>
 </html>

@@ -1,33 +1,29 @@
 'use strict'
 
 document.querySelector('form').addEventListener('submit', function(event) {
-    const textInput = document.getElementById('floatingName');
-    const latitude = document.getElementById('floatingLatitude');
-    const longitude = document.getElementById('floatingLongitude');
+    event.preventDefault();
     
-    if (!textInput.checkValidity()) {
-        textInput.classList.add('is-invalid');
-        event.preventDefault();
-        event.stopPropagation();
+    const formInputs = document.querySelectorAll('.form-control')
+    let formIsValid = true;
+
+    formInputs.forEach(input => {
+        if(!input.checkValidity()) {
+            input.classList.add('is-invalid');
+            formIsValid = false;
+        } else {
+            input.classList.remove('is-invalid');
+        }
+    })
+
+    if (formIsValid) {
+        console.log('Form is valid, redirecting...');
+        window.location.href = '../popup/popup.html';
     } else {
-        textInput.classList.remove('is-invalid');
-    }
-    
-    if (!latitude.checkValidity()) {
-        latitude.classList.add('is-invalid');
-        event.preventDefault();
+        console.log('Form is invalid.');
         event.stopPropagation();
-    } else {
-        latitude.classList.remove('is-invalid');
     }
 
-    if (!longitude.checkValidity()) {
-        longitude.classList.add('is-invalid');
-        event.preventDefault();
-        event.stopPropagation();
-    } else {
-        longitude.classList.remove('is-invalid');
-    }
-
+    console.log('Failure');
     this.classList.add('was-validated');
+    
 }, false);
