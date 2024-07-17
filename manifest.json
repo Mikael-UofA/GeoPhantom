@@ -12,5 +12,19 @@
             "128": "images/logo.png"
         },
         "default_title": "Run"
-    }
+    },
+    "background": {
+        "service_worker": "misc/background.js", 
+        "type": "module"
+    },
+    "permissions": [
+        "storage",
+        "activeTab"
+    ],
+    "content_scripts": [
+   {
+     "matches": ["<all_urls>"],
+     "js": ["misc/content-script.js"]
+   }
+ ]
 }

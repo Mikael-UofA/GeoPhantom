@@ -2,7 +2,7 @@
 
 document.querySelector('form').addEventListener('submit', function(event) {
     event.preventDefault();
-    
+
     const formInputs = document.querySelectorAll('.form-control')
     let formIsValid = true;
 
@@ -16,14 +16,19 @@ document.querySelector('form').addEventListener('submit', function(event) {
     })
 
     if (formIsValid) {
-        console.log('Form is valid, redirecting...');
+        const name = document.getElementById('floatingName').value;
+        const latitude = parseFloat(document.getElementById('floatingLatitude').value);
+        const longitude = parseFloat(document.getElementById('floatingLongitude').value);
+
+        chrome.runtime.sendMessage({action: "save", value: name + ", " + latitude + ", " + longitude}, function(response) {
+            console.log(response.farewell);
+        })
         window.location.href = '../popup/popup.html';
     } else {
         console.log('Form is invalid.');
         event.stopPropagation();
     }
 
-    console.log('Failure');
     this.classList.add('was-validated');
     
 }, false);
