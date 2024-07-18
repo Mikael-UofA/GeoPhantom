@@ -1,12 +1,12 @@
 'use strict'
 
-chrome.runtime.sendMessage({action: "load"}, function(response) {
+chrome.runtime.sendMessage({ action: 'load' }, (response) => {
     if (response.error) {
         console.error('Error:', response.error);
     } else {
-        console.log('Locations:', response.value);
+        console.log('Loaded locations:', response.value);
     }
-})
+});
 const displayedLocations = 5;
 const savedLocation = 23;
 const channels = Math.ceil(23/5);
