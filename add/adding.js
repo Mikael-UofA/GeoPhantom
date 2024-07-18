@@ -20,8 +20,8 @@ document.querySelector('form').addEventListener('submit', function(event) {
         const latitude = parseFloat(document.getElementById('floatingLatitude').value);
         const longitude = parseFloat(document.getElementById('floatingLongitude').value);
 
-        chrome.runtime.sendMessage({action: "save", value: name + ", " + latitude + ", " + longitude}, function(response) {
-            console.log(response.farewell);
+        chrome.runtime.sendMessage({action: "add", value: name + ", " + latitude + ", " + longitude}, function(response) {
+            console.log(response);
         })
         window.location.href = '../popup/popup.html';
     } else {
