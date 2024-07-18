@@ -1,20 +1,12 @@
 'use strict'
 
-chrome.runtime.sendMessage({ action: 'load' }, (response) => {
-    if (response.error) {
-        console.error('Error:', response.error);
-    } else {
-        console.log('Loaded locations:', response.value);
-    }
-});
-const displayedLocations = 5;
-const savedLocation = 23;
-const channels = Math.ceil(23/5);
-const listSize = 13;
-let currentChannel = 1;
+loadLocations()
 
-updateChannels();
-updateListButtons();
+const maxDisplayedLocations = 5;
+let locations = [];
+let listSize = 0;
+let channels = 1;
+let currentChannel = 1;
 
 document.addEventListener('DOMContentLoaded', () => {
     const buttons = document.querySelectorAll('.list-group-item');
@@ -74,6 +66,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+function loadLocations() {
+    chrome.runtime.sendMessage({ action: 'load' }, (response) => {
+        if (response.error) {
+            console.error('Error:', response.error);
+        } else {
+            locations = response.value;
+            listSize = locations.length;
+            channels = Math.max(Math.ceil(listSize / maxDisplayedLocations), 1);
+
+            updateChannels();
+            updateListButtons();
+        }
+    });
+}
+
 function updateChannels() {
     document.getElementById('dynamicText').innerHTML = currentChannel + "/" + channels;
 }
@@ -81,6 +88,10 @@ function updateChannels() {
 function updateListButtons() {
     const buttons = document.querySelectorAll('.list-group-item');
     buttons.forEach((button, index) => {
-        button.innerHTML = listSize <= index + ((currentChannel - 1) * 5) ? "------------------" : index + ((currentChannel - 1) * 5);
+        button.innerHTML = listSize <= index + (currentChannel - 1) * 5 ? "------------------" : getLocation(index, currentChannel).name;
     });
+}
+
+function getLocation(index, currentChannel) {
+    return locations[index + (currentChannel - 1) * 5]
 }
