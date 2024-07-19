@@ -11,13 +11,16 @@ let currentChannel = 1;
 document.addEventListener('DOMContentLoaded', () => {
     const buttons = document.querySelectorAll('.list-group-item');
     const toggleButton = document.getElementById('toggleButton');
+    const toggleButton2 = document.getElementById('toggleButton2');
     const prevButton = document.getElementById('previous');
     const nextButton = document.getElementById('next');
     const addButton = document.getElementById('addButton');
+    const deleteButton = document.getElementById('deleteButton');
 
 
 
     buttons.forEach(button => {
+        // If button is already clicked, unclick it, otherwise unclick all other buttons
         button.addEventListener('click', () => {
             if (button.classList.contains('active')) {
                 button.classList.remove('active');
@@ -27,9 +30,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
     toggleButton.addEventListener('click', () => {
+        // If the button is disabled
         if (toggleButton.classList.contains('btn-dis')) {
             const activeButton = document.querySelector('.list-group-item.active');
+            // If an element of the list was selected
             if (activeButton) {
                 toggleButton.classList.remove('btn-dis');
                 toggleButton.classList.add('btn-act')
@@ -43,6 +49,25 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleButton.classList.add('btn-dis');
             toggleButton.textContent = 'Disabled';
         }
+    });
+
+    toggleButton2.addEventListener('click', () => {
+        
+        const activeButton = document.querySelector('.list-group-item.active');
+        if (activeButton) {
+            // Remove element
+            const index = getActiveButtonIndex();
+            activeButton.classList.remove('active');
+            locations.splice(index, 1);
+
+            updateInfo() // update list and movement;
+            saveLocations() // save to storage;
+            deleteButton.click() // remove delete mode;
+                
+        } else {
+            console.log('First select an element');
+        }
+        
     });
 
     prevButton.addEventListener('click', () => {
@@ -63,8 +88,27 @@ document.addEventListener('DOMContentLoaded', () => {
     addButton.addEventListener('click', () => {
         window.location.href = "../add/adding.html";
     })
+    deleteButton.addEventListener('click', () => {
+        if (toggleButton2.classList.contains('hide')) {
+            toggleButton.classList.add('hide');
+            toggleButton2.classList.remove('hide');
+            document.body.style.backgroundColor = "#F34C55";
+        } else {
+            toggleButton2.classList.add('hide');
+            toggleButton.classList.remove('hide');
+            document.body.style.backgroundColor = "#23283A";
+        }
+    })
 
 });
+
+function updateInfo() {
+    listSize = locations.length;
+    channels = Math.max(Math.ceil(listSize / maxDisplayedLocations), 1);
+
+    updateChannels();
+    updateListButtons();
+}
 
 function loadLocations() {
     chrome.runtime.sendMessage({ action: 'load' }, (response) => {
@@ -72,19 +116,23 @@ function loadLocations() {
             console.error('Error:', response.error);
         } else {
             locations = response.value;
-            listSize = locations.length;
-            channels = Math.max(Math.ceil(listSize / maxDisplayedLocations), 1);
-
-            updateChannels();
-            updateListButtons();
+            updateInfo()
         }
     });
+}
+function saveLocations() {
+    chrome.runtime.sendMessage({ action: 'save', value: locations }, (response) => {
+        if (response.error) {
+            console.error('Error:', response.error);
+        } else {
+            console.log('Save successful:', response.value);
+        }
+    })
 }
 
 function updateChannels() {
     document.getElementById('dynamicText').innerHTML = currentChannel + "/" + channels;
 }
-
 function updateListButtons() {
     const buttons = document.querySelectorAll('.list-group-item');
     buttons.forEach((button, index) => {
@@ -94,4 +142,14 @@ function updateListButtons() {
 
 function getLocation(index, currentChannel) {
     return locations[index + (currentChannel - 1) * 5]
+}
+
+function getActiveButtonIndex() {
+    const buttons = document.querySelectorAll('.list-group-item');
+    for (let i = 0; i < buttons.length; i++) {
+        if (buttons[i].classList.contains('active')) {
+            return i;
+        }
+    }
+    return -1;
 }

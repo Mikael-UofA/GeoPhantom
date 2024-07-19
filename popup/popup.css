@@ -1,6 +1,7 @@
 body {
     height: 450px;
     width: 450px;
+    background-color: #23283A;
 }
 
 .main {
@@ -60,6 +61,9 @@ a:hover {
 .movement .dynamic-text {
     margin: 0 1rem;
 }
+#dynamicText {
+color: white;
+}
 
 #addButton {
   background-color: #ff2882;
@@ -70,4 +74,23 @@ a:hover {
 }
 #addButton:hover {
   background-color: #840E33;
+}
+
+#deleteButton {
+    background-color: #ff2882;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+#deleteButton:hover {
+    background-color: #840E33;
+}
+
+#toggleButton2 {
+    background-color: #ff2882;
+}
+
+.hide {
+    display: none;
 }
