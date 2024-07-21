@@ -21,8 +21,7 @@
         "storage",
         "activeTab",
         "background",
-        "webRequest",
-        "geolocation",
+        "debugger",
         "tabs"
     ],
    "host_permissions": [
