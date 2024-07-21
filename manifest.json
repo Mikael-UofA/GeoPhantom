@@ -19,12 +19,13 @@
     },
     "permissions": [
         "storage",
-        "activeTab"
+        "activeTab",
+        "background",
+        "webRequest",
+        "geolocation",
+        "tabs"
     ],
-    "content_scripts": [
-   {
-     "matches": ["<all_urls>"],
-     "js": ["misc/content-script.js"]
-   }
- ]
+   "host_permissions": [
+        "<all_urls>"
+    ]
 }

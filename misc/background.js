@@ -16,7 +16,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 sendResponse({ error: error.message });
             });
             return true;
-
         case 'save':
             saveLocations(request.value).then(() => {
                 sendResponse({ value: true });
@@ -25,7 +24,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 sendResponse({ error: error.message });
             });
             return true;
-
         case 'load':
             loadLocations().then(locations => {
                 console.log("Load Successful");
@@ -35,7 +33,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 sendResponse({ error: error.message });
             });
             return true;
-
         default:
             console.log('Save unsuccessful. Unknown action:', request.action);
             sendResponse({ error: 'Unknown action' });
@@ -54,7 +51,6 @@ function loadLocations() {
         });
     });
 }
-
 function parseLocationString(locationString) {
     const parts = locationString.split(',').map(part => part.trim());
 
@@ -66,7 +62,6 @@ function parseLocationString(locationString) {
 
     return location
 }
-
 function saveLocations(locations) {
     return new Promise((resolve, reject) => {
         chrome.storage.local.set({ locations: JSON.stringify(locations) }, function() {
@@ -79,3 +74,7 @@ function saveLocations(locations) {
         });
     });
 }
+
+chrome.webRequest.onBeforeRequest.addListener(function (data) {
+    console.log('catched', data);
+  }, {urls: ['<all_urls>']});
