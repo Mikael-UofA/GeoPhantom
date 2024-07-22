@@ -2,10 +2,10 @@
     "use strict";
     // Function to configure geolocation settings for a tab
     const configureGeolocation = tabId => {
-        chrome.storage.local.get(["activation", "geo"], items => {
-            const { geo, activation } = items;
+        chrome.storage.local.get(["buttonState", "geo"], items => {
+            const { geo, buttonState } = items;
 
-            if (activation) {
+            if (buttonState) {
                 // Attach the debugger to the specified tab
                 chrome.debugger.attach({ tabId }, "1.3", () => {
                     if (!chrome.runtime.lastError) {
@@ -21,9 +21,21 @@
                         }
                     }
                 });
+            } else {
+                detachDebugger();
             }
         });
     };
+
+    function detachDebugger() {
+        chrome.debugger.getTargets((e=>{
+            for (const t in e)
+                e[t].attached && e[t].tabId && chrome.debugger.detach({
+                    tabId: e[t].tabId
+                })
+        }
+        ))
+    }
 
     // Function to ensure the debugger is attached and configure geolocation
     const ensureDebuggerAttached = tabId => {
@@ -132,4 +144,5 @@
             });
         });
     }
+
 })();

@@ -18,6 +18,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const deleteButton = document.getElementById('deleteButton');
 
 
+    // Get the button state from storage
+    chrome.storage.local.get(['buttonState'], function(result) {
+        if (result.buttonState) {
+            toggleButton.classList.remove('btn-dis');
+            toggleButton.classList.add('btn-act')
+            toggleButton.textContent = 'Activated';
+        } else {
+            toggleButton.classList.remove('btn-act')
+            toggleButton.classList.add('btn-dis');
+            toggleButton.textContent = 'Disabled';
+        }
+    });
 
     buttons.forEach(button => {
         // If button is already clicked, unclick it, otherwise unclick all other buttons
@@ -40,6 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 toggleButton.classList.remove('btn-dis');
                 toggleButton.classList.add('btn-act')
                 toggleButton.textContent = 'Activated';
+                let geolocation = getGeolocation();
+                chrome.storage.local.set({ buttonState: true, geo: geolocation });
                 console.log(`Active button text: ${activeButton.textContent}`);
             } else {
                 console.log('No active button found');
@@ -48,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleButton.classList.remove('btn-act')
             toggleButton.classList.add('btn-dis');
             toggleButton.textContent = 'Disabled';
+            chrome.storage.local.set({ buttonState: false, geo: 0 });
         }
     });
 
@@ -109,7 +124,6 @@ function updateInfo() {
     updateChannels();
     updateListButtons();
 }
-
 function loadLocations() {
     chrome.runtime.sendMessage({ action: 'load' }, (response) => {
         if (response.error) {
@@ -120,6 +134,7 @@ function loadLocations() {
         }
     });
 }
+
 function saveLocations() {
     chrome.runtime.sendMessage({ action: 'save', value: locations }, (response) => {
         if (response.error) {
@@ -129,21 +144,24 @@ function saveLocations() {
         }
     })
 }
-
 function updateChannels() {
     document.getElementById('dynamicText').innerHTML = currentChannel + "/" + channels;
 }
 function updateListButtons() {
     const buttons = document.querySelectorAll('.list-group-item');
     buttons.forEach((button, index) => {
-        button.innerHTML = listSize <= index + (currentChannel - 1) * 5 ? "------------------" : getLocation(index, currentChannel).name;
+        if (listSize <= index + (currentChannel - 1) * 5 ) {
+            button.classList.add('hide');
+        } else {
+            button.innerHTML = getLocation(index, currentChannel).name;
+            button.classList.remove('hide');
+        }
+        
     });
 }
-
 function getLocation(index, currentChannel) {
     return locations[index + (currentChannel - 1) * 5]
 }
-
 function getActiveButtonIndex() {
     const buttons = document.querySelectorAll('.list-group-item');
     for (let i = 0; i < buttons.length; i++) {
@@ -152,4 +170,9 @@ function getActiveButtonIndex() {
         }
     }
     return -1;
+}
+function getGeolocation() {
+    const index = getActiveButtonIndex();
+    const loc = getLocation(index, currentChannel);
+    return {lat: loc.lat, long: loc.long};
 }

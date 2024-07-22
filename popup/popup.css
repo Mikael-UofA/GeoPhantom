@@ -4,6 +4,14 @@ body {
     background-color: #23283A;
 }
 
+.title1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: wheat;
+    margin-top: 5px;
+}
+
 .main {
     display: flex;
     justify-content: center;
