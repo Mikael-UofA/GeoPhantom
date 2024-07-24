@@ -22,5 +22,10 @@
         "background",
         "debugger",
         "tabs"
-    ]
+    ],
+    "icons": {
+        "16": "images/small_logo.png",
+        "48": "images/small_logo.png",
+        "128": "images/logo.png"
+    }
 }
