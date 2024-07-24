@@ -19,7 +19,6 @@
     },
     "permissions": [
         "storage",
-        "background",
         "debugger",
         "tabs"
     ],
