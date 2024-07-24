@@ -1,7 +1,7 @@
 # GeoPhantom ![Small Ghost](./images/small_ghost.png) ![Geo Logo](./images/geo_icon.png)
 
 <p>
-    <img src="./images/small_logo.png" alt="GeoPhantom Logo" style="float: right; margin-left: 20px; width: 150px;">
+    <img align='right' src="./images/small_logo.png" alt="GeoPhantom Logo" width="150px">
     GeoPhantom is a Chrome extension that allows you to save the names of locations <br> along with their latitude and longitude coordinates. Once saved, you can easily select <br> from your saved locations to spoof your browser's location to any.
     <br> <br> <br>
 </p>
@@ -25,23 +25,23 @@
 2. Click the Plus button.
 3. Enter the name, latitude, and longitude of the location you want to save.
 
-<div style="text-align: center;">
+<p align="center">
     <img src="./images/new_location_snippet.png" alt="New Location" style="width: 300px;">
-</div>
+</p>
 
 4. Click "Submit".
 5. To spoof your location, select one of the saved locations from the list and click the Disabled Button.
 
-<div style="text-align: center;">
+<p align="center">
     <img src="./images/main_popup_snippet.png" alt="Main Popup" style="width: 300px;">
-</div>
+</p>
 
 6. Your browser's location will now be spoofed to the selected location.
 
-<div style="text-align: center;">
+<p align="center">
     <img src="./images/debugging_snippet.png" alt="Activated">
     <br>
-</div>
+</p>
 
 ## Contributing
 
