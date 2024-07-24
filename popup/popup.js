@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     toggleButton.addEventListener('click', () => {
         // If the button is disabled
         if (toggleButton.classList.contains('btn-dis')) {
-            const activeButton = document.querySelector('.list-group-item.active');
+            const activeButton = document.querySelector('.group-item.active');
             // If an element of the list was selected
             if (activeButton) {
                 toggleButton.classList.remove('btn-dis');
