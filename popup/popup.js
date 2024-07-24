@@ -124,16 +124,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function updateInfo() {
-    const template = document.getElementById('icon-template').content;
-    const formGroups = document.querySelectorAll('.form-group');
-
     listSize = locations.length;
     channels = Math.max(Math.ceil(listSize / maxDisplayedLocations), 1);
-
-    formGroups.forEach(group => {
-        const icon = document.importNode(template, true);
-        group.appendChild(icon);
-    });
 
     updateChannels();
     updateListButtons();
