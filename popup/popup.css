@@ -1,15 +1,30 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+
 body {
-    height: 450px;
+    font-family: 'Poppins', sans-serif;
+	font-weight: 300;
+    height: 500px;
     width: 450px;
-    background-color: #23283A;
+    color: #c4c3ca;
+    background-image: url(../images/pattern.svg);
+    background-size: cover;
+    background-position: center;
+	background-color: #1f2029;
+}
+
+.active {
+    background-color: #6a6175;
 }
 
 .title1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: wheat;
-    margin-top: 5px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
 }
 
 .main {
@@ -20,21 +35,16 @@ body {
 
 .list-group {
     height: 230px;
-    width: 300px;
-    margin-top: 50px;
-    margin-left: 75px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.btn-prim {
-    width: 200px;
-}
+
 .btn-act {
-    background-color: #007bff;
+    background-color: #352961;
     color: white;
-}
-.btn-dis {
-    background-color: grey;
-    color: black;
 }
 
 a {
@@ -43,13 +53,13 @@ a {
     padding: 8px 16px;
 }
 a:hover {
-    background-color: #ddd;
-    color: black;
+    background-color: #2f243d;
+    color: #df6688;
 }
     
-.next .previous {
-  background-color: #f1f1f1;
-  color: black;
+.next, .previous {
+    background-color: #df6688;
+    color: #2f243d; 
 }
 .round {
     border-radius: 50%;
@@ -60,6 +70,7 @@ a:hover {
     align-items: center;
     justify-content: center;
     margin-bottom: 10px;
+    margin-top: 20px;
 }
 .movement a {
     text-decoration: none;
@@ -69,30 +80,75 @@ a:hover {
 .movement .dynamic-text {
     margin: 0 1rem;
 }
+.btn-prim{  
+    border-radius: 4px;
+    margin-top: 5px;
+    height: 45px;
+    width: 200px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    -webkit-transition : all 200ms linear;
+    transition: all 200ms linear;
+    padding: 0 30px;
+    letter-spacing: 1px;
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+    -ms-flex-pack: center;
+    text-align: center;
+    border: none;
+    background-color: #df6688;
+    color: whitesmoke; 
+    box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
+}
+.btn-prim:hover {
+    background-color: #774181;
+}
+
 #dynamicText {
 color: white;
 }
 
-#addButton {
-  background-color: #ff2882;
+#addButton, #deleteButton {
   position: fixed;
   bottom: 20px;
-  right: 20px;
+  width: 100px;
   z-index: 1000;
+  display: inline-block;
+  outline: none;
+  cursor: pointer;
+  font-weight: 600;
+  border-radius: 3px;
+  padding: 12px 24px;
+  border: 0;
+  color: whitesmoke;
+  background: #df6688;
+  line-height: 1.15;
+  font-size: 12px;
+  :hover {
+      transition: all .1s ease;
+      box-shadow: 0 0 0 0 #fff, 0 0 0 3px #df6688;
+  }
+
 }
-#addButton:hover {
-  background-color: #840E33;
+#addButton:hover, #deleteButton:hover {
+  background-color: #352961;
 }
 
-#deleteButton {
-    background-color: #ff2882;
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    z-index: 1000;
+#addButton {
+    right: 20px;
 }
-#deleteButton:hover {
-    background-color: #840E33;
+#deleteButton {
+    left: 20px;
 }
 
 #toggleButton2 {
@@ -102,3 +158,61 @@ color: white;
 .hide {
     display: none;
 }
+
+.group-item {
+  padding: 13px 20px;
+  padding-left: 55px;
+  height: 50px;
+  width: 300px;
+  font-weight: 500;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: 1px;
+  outline: none;
+  color: #c4c3ca;
+  background-color: #6d2962;
+  border: none;
+  margin-bottom: 1px;
+  -webkit-transition: all 200ms linear;
+  transition: all 200ms linear;
+  box-shadow: 0 4px 8px 0 rgba(21,21,21,.2);
+  transition: background-color 0.3s ease;
+}
+
+.group-item.del {
+    background-color: #d1a47b;
+  }
+
+/* Active state */
+.group-item.active {
+    background-color: #132743;
+}
+
+.group-item.active.del {
+    background-color: #e62f0a;
+}
+
+/* Hover state */
+.group-item:hover {
+    background-color: #ffcbcb;
+}
+.form-group{ 
+    position: relative;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+.input-icon {
+    position: absolute;
+    top: 0;
+    left: 18px;
+    height: 48px;
+    font-size: 24px;
+    line-height: 48px;
+    text-align: left;
+    fill: #df6688;
+    -webkit-transition: all 200ms linear;
+      transition: all 200ms linear;
+  }
+

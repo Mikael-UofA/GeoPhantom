@@ -10,11 +10,21 @@
 <body>
     <h2 class="title1">GeoPhantom</h2>
     <div class="list-group">
-        <button type="button" class="list-group-item list-group-item-action">A first item</button>
-        <button type="button" class="list-group-item list-group-item-action">A second item</button>
-        <button type="button" class="list-group-item list-group-item-action">A third button item</button>
-        <button type="button" class="list-group-item list-group-item-action">A fourth button item</button>
-        <button type="button" class="list-group-item list-group-item-action">A fifth button item</button>
+        <div class="form-group">
+        <button type="button" class="group-item">A first item</button>
+        </div>
+        <div class="form-group">
+        <button type="button" class="group-item">A second item</button>
+        </div>
+        <div class="form-group">
+        <button type="button" class="group-item">A third button item</button>
+        </div>
+        <div class="form-group">
+        <button type="button" class="group-item">A fourth button item</button>
+        </div>
+        <div class="form-group">
+        <button type="button" class="group-item">A fifth button item</button>
+        </div>    
     </div>
 
     <div class="movement">
@@ -29,11 +39,14 @@
     </div>
 
     <div class="btn-group" role="group" aria-label="Third group">
-        <button type="button" class="btn btn-info" id="addButton">+</button>
+        <button type="button" class="btn btn-info" id="addButton">NEW</button>
     </div>
     <div class="btn-group" role="group" aria-label="fourth group">
-        <button type="button" class="btn btn-info" id="deleteButton">x</button>
+        <button type="button" class="btn btn-info" id="deleteButton">Remove</button>
     </div>
+    <template id="icon-template">
+        <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-3.148 0-6 2.553-6 5.702 0 3.148 2.602 6.907 6 12.298 3.398-5.391 6-9.15 6-12.298 0-3.149-2.851-5.702-6-5.702zm0 8c-1.105 0-2-.895-2-2s.895-2 2-2 2 .895 2 2-.895 2-2 2zm8 12c0 2.209-3.581 4-8 4s-8-1.791-8-4c0-1.602 1.888-2.98 4.608-3.619l1.154 1.824c-.401.068-.806.135-1.178.242-3.312.949-3.453 2.109-.021 3.102 2.088.603 4.777.605 6.874-.001 3.619-1.047 3.164-2.275-.268-3.167-.296-.077-.621-.118-.936-.171l1.156-1.828c2.723.638 4.611 2.016 4.611 3.618z"/></svg>
+    </template>
     <script src="./popup.js"></script>
 </body>
 </html>

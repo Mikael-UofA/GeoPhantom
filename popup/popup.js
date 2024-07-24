@@ -9,7 +9,7 @@ let channels = 1;
 let currentChannel = 1;
 
 document.addEventListener('DOMContentLoaded', () => {
-    const buttons = document.querySelectorAll('.list-group-item');
+    const buttons = document.querySelectorAll('.group-item');
     const toggleButton = document.getElementById('toggleButton');
     const toggleButton2 = document.getElementById('toggleButton2');
     const prevButton = document.getElementById('previous');
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     toggleButton2.addEventListener('click', () => {
         
-        const activeButton = document.querySelector('.list-group-item.active');
+        const activeButton = document.querySelector('.group-item.active');
         if (activeButton) {
             // Remove element
             const index = getActiveButtonIndex();
@@ -101,25 +101,39 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     addButton.addEventListener('click', () => {
-        window.location.href = "../add/adding.html";
+        window.location.href = "../new/new.html";
     })
     deleteButton.addEventListener('click', () => {
         if (toggleButton2.classList.contains('hide')) {
             toggleButton.classList.add('hide');
             toggleButton2.classList.remove('hide');
-            document.body.style.backgroundColor = "#F34C55";
+            buttons.forEach(button => {
+                button.classList.add('del')
+            });
+            document.body.style.backgroundImage = "url('../images/pattern3.svg')";
         } else {
             toggleButton2.classList.add('hide');
             toggleButton.classList.remove('hide');
-            document.body.style.backgroundColor = "#23283A";
+            buttons.forEach(button => {
+                button.classList.remove('del')
+            });
+            document.body.style.backgroundImage = "url('../images/pattern.svg')";
         }
     })
 
 });
 
 function updateInfo() {
+    const template = document.getElementById('icon-template').content;
+    const formGroups = document.querySelectorAll('.form-group');
+
     listSize = locations.length;
     channels = Math.max(Math.ceil(listSize / maxDisplayedLocations), 1);
+
+    formGroups.forEach(group => {
+        const icon = document.importNode(template, true);
+        group.appendChild(icon);
+    });
 
     updateChannels();
     updateListButtons();
@@ -148,13 +162,18 @@ function updateChannels() {
     document.getElementById('dynamicText').innerHTML = currentChannel + "/" + channels;
 }
 function updateListButtons() {
-    const buttons = document.querySelectorAll('.list-group-item');
+    const buttons = document.querySelectorAll('.group-item');
     buttons.forEach((button, index) => {
+        const formGroup = button.closest('.form-group');
+        const svg = formGroup.querySelector('.input-icon');
+
         if (listSize <= index + (currentChannel - 1) * 5 ) {
             button.classList.add('hide');
+            svg.classList.add('hide');
         } else {
             button.innerHTML = getLocation(index, currentChannel).name;
             button.classList.remove('hide');
+            svg.classList.remove('hide');
         }
         
     });
@@ -163,7 +182,7 @@ function getLocation(index, currentChannel) {
     return locations[index + (currentChannel - 1) * 5]
 }
 function getActiveButtonIndex() {
-    const buttons = document.querySelectorAll('.list-group-item');
+    const buttons = document.querySelectorAll('.group-item');
     for (let i = 0; i < buttons.length; i++) {
         if (buttons[i].classList.contains('active')) {
             return i;
