@@ -19,8 +19,7 @@
     },
     "permissions": [
         "storage",
-        "debugger",
-        "tabs"
+        "debugger"
     ],
     "icons": {
         "16": "images/small_logo.png",
