@@ -3,8 +3,10 @@
 <p>
     <img align='right' src="./images/small_logo.png" alt="GeoPhantom Logo" width="150px">
     GeoPhantom is a Chrome extension that allows you to save the names of locations <br> along with their latitude and longitude coordinates. Once saved, you can easily select <br> from your saved locations to spoof your browser's location to any.
-    <br> <br> <br>
+    <br> <br> 
 </p>
+
+Get it on [Chrome](https://chromewebstore.google.com/detail/geophantom/pjohojbinfgblonnnfgmancpdcpnjjdb)!
 
 ## Features
 
