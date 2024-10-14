@@ -71,10 +71,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const activeButton = document.querySelector('.group-item.active');
         if (activeButton) {
             // Remove element
-            const index = getActiveButtonIndex();
+            const index = getActiveButtonIndex() + (currentChannel - 1) * 5;
+            
             activeButton.classList.remove('active');
             locations.splice(index, 1);
-
             updateInfo() // update list and movement;
             saveLocations() // save to storage;
             deleteButton.click() // remove delete mode;
