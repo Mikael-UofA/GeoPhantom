@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "GeoPhantom",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "author": "mikael.nineza@gmail.com",
     "description": "Lets you easily spoof your location in Chrome. Save favorite places and switch between them anytime.",
     "action": {
