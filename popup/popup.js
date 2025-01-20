@@ -110,14 +110,12 @@ document.addEventListener('DOMContentLoaded', () => {
             buttons.forEach(button => {
                 button.classList.add('del')
             });
-            document.body.style.backgroundImage = "url('../images/pattern3.svg')";
         } else {
             toggleButton2.classList.add('hide');
             toggleButton.classList.remove('hide');
             buttons.forEach(button => {
                 button.classList.remove('del')
             });
-            document.body.style.backgroundImage = "url('../images/pattern.svg')";
         }
     })
 
