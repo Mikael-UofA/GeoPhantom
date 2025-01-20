@@ -18,24 +18,24 @@
                                 longitude: geo.long ? parseFloat(geo.long) : 29.373503814891507,
                                 accuracy: 1
                             });
+                            console.log(`Debugger successfully attached to tab ${tabId}`)
                         }
+                    }
+                    else {
+                        console.error(`Failed to atach debugger to tab ${tabId}:`, chrome.runtime.lastError.message);
                     }
                 });
             } else {
-                detachDebugger();
+                chrome.debugger.getTargets((tabs) => {
+                    for (const tab in tabs) {
+                      if (tabs[tab].attached && tabs[tab].tabId) {
+                        chrome.debugger.detach({ tabId: tabs[tab].tabId })
+                      }
+                    }
+                  })
             }
         });
     };
-
-    function detachDebugger() {
-        chrome.debugger.getTargets((e=>{
-            for (const t in e)
-                e[t].attached && e[t].tabId && chrome.debugger.detach({
-                    tabId: e[t].tabId
-                })
-        }
-        ))
-    }
 
     // Function to ensure the debugger is attached and configure geolocation
     const ensureDebuggerAttached = tabId => {
